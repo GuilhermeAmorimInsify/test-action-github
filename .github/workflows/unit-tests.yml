@@ -50,7 +50,7 @@ jobs:
                 "Where's my unit tests, Lebowski?",
                 "In case I don't see ya: good morning, good evening and write unit tests."
               ];
-              const comment = `${snarkyComments[math.floor(math.random() * snarkyComments.length)]}\n\nPotential files:\n- ${withoutTests.join("\n- ")}`;
+              const comment = `${snarkyComments[Math.floor(Math.random() * snarkyComments.length)]}\n\nPotential files:\n- ${withoutTests.join("\n- ")}`;
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,

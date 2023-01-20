@@ -19,7 +19,7 @@ jobs:
             console.log(fileList);
             const tsFiles = fileList
               .map((file) => file.filename)
-              .filter((file) => file.endsWith('.ts') && !file.contains('automated-tests'));
+              .filter((file) => file.endsWith('.ts') && !file.includes('automated-tests'));
             const testFiles = [];
             const codeFiles = [];
             for (const file of tsFiles) {
@@ -29,7 +29,7 @@ jobs:
                 codeFiles.push(file);
               }
             }
-            const withoutTests = codeFiles.filter((file) => !testFiles.contains(file));
+            const withoutTests = codeFiles.filter((file) => !testFiles.includes(file));
             if (withoutTests.length > 0) {
               const snarkyComments = [
                 'Hey! You forgot the unit tests!',

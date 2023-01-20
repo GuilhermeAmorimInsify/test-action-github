@@ -8,7 +8,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Check for unit tests
-        uses: action/github-script@v6
+        uses: actions/github-script@v6
         with:
           script: |
             const fileList = github.rest.pulls.listFiles({

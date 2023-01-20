@@ -57,7 +57,7 @@ jobs:
                 "In case I don't see ya: good morning, good evening and write unit tests.",
                 '"Look mom! Without unit tests!" - Famous last words.',
                 'Without unit tests you might end up creating Skynet accidentaly. This is not a good thing.',
-                'Maybe the person that will have to fix the bugs is a psycopath that knows where you live.'
+                'Maybe the person that will have to fix the bugs is a psycopath that knows where you live.',
                 '"I think you missed a stop over there" - Stacy's mom, but she\'s not impressed.'
               ];
               comment = `${snarkyComments[Math.floor(Math.random() * snarkyComments.length)]}\n\nPotential files:\n- ${withoutTests.join("\n- ")}\n\nIf tests already exist to these files, ignore me.`;

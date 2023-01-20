@@ -5,7 +5,7 @@ on:
       - opened
 jobs:
   clean-pr:
-    runs-on: self-hosted-tiny
+    runs-on: self-hosted
     steps:
       - name: Check for unit tests
         uses: action/github-script@v6

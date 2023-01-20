@@ -11,7 +11,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const fileList = github.rest.pulls.listFiles({
+            const fileList = await github.rest.pulls.listFiles({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.payload.pull_request.number,

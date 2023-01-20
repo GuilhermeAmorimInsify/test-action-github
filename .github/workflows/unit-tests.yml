@@ -16,6 +16,7 @@ jobs:
               repo: context.repo.repo,
               pull_number: context.payload.pull_request.number,
             });
+            console.log(fileList);
             const tsFiles = fileList
               .map((file) => file.filename)
               .filter((file) => file.endsWith('.ts') && !file.contains('automated-tests'));

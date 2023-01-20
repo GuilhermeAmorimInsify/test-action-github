@@ -43,7 +43,6 @@ jobs:
                 "Machines might be replacing us, but they won't be writing unit tests for you (they need your example).",
                 "I'm you from the the future, I don't have time to explain, write unit tests!",
                 "I'm sorry Dave, I'm afraid you forgot the unit tests.",
-                "Uh-oh! You forgot the unit tests, Martijn will make go kayaking... without the kayak.",
                 "With great code, comes great unit testing.",
                 '"I will write unit tests, I will write unit tests, I will write unit tests..." - Bart Simpsom',
                 "To be fair, this script is not unit tested, don't let your code be like me",

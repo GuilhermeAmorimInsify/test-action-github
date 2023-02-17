@@ -1,0 +1,21 @@
+name: 'Auto-Update To Auto-Merge'
+on:
+  push:
+    branches:
+      - 'main'
+      - 'master'
+      - 'master-mre'
+jobs:
+  update-pr-branches:
+    runs-on: self-hosted
+    steps:
+      - name: Update all PRs marked to auto-merge
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const pr_list = (await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            })).data;
+            console.log(pr_list);
+

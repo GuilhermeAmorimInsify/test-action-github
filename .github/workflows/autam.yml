@@ -5,9 +5,6 @@ on:
       - 'main'
       - 'master'
       - 'master-mre'
-  schedule:
-    # in case the previous trigger fails for some reason and there's no one to see.
-    - cron: '*/60 * * * *'
 jobs:
   update-pr-branches:
     runs-on: self-hosted

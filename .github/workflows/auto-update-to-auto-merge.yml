@@ -43,8 +43,7 @@ jobs:
                   pull_number: pr.number
                 });
               } catch (error) {
-                console.log(error);
-                update_result = error;
+                update_result = error.response;
               }
               // outputs a message based on the status...
               switch(update_result.status) {

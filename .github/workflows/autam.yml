@@ -5,9 +5,6 @@ on:
       - 'main'
       - 'master'
       - 'master-mre'
-  schedule:
-    # in case the previous trigger fails for some reason and there's no one to see.
-    - cron: '*/60 * * * *'
 jobs:
   update-pr-branches:
     runs-on: self-hosted
@@ -24,7 +21,9 @@ jobs:
               repo
             })).data;
             // Filter only the ones that are on auto-merge
-            const auto_merge_prs = pr_list.filter(pr => pr.auto_merge !== null);
+            const auto_merge_prs = pr_list.filter(pr =>
+              pr.auto_merge !== null
+            ));
             // print out some statistics for debug
             console.log('PR count:');
             console.log(pr_list.length);
@@ -33,22 +32,8 @@ jobs:
             // iterate through the interesting PRs
             for (const pr of auto_merge_prs) {
               const user = pr.user.login;
-              // TODO check if the PR needs updating, skip
-              // TODO check the checks and let the user know of any issues, skip
               // TODO check if passed all reviews, skip
-              // TODO check if the no-auto-update tag is added
-              // Checking if this has the "no-auto-update label"
-              const no_update_label = await github.rest.issues.getLabel({
-                owner,
-                repo,
-                name: 'no-auto-update'
-              });
-              console.log('Checking if the no-update-label is present.');
-              console.log(no_update_label);
-              if (no_update_label.status === 200) {
-                console.log(`The "${pr.title}" was marked to not be updated automatically, skipping.`);
-                continue;
-              }
+              console.log(pr);
               // debug messages
               console.log(`Updating "${pr.title}", ${user} will be happy!`);
               // update pr branch
@@ -59,14 +44,8 @@ jobs:
               });
               // outputs a message based on the status...
               switch(update_result.status) {
-                case 202: 
+                case 202:
                   console.log("YES! The PR was updated successfully. The message was...");
-                  await github.rest.issues.createComment({ 
-                    owner,
-                    repo,
-                    issue_number: pr.number,
-                    body: `Hey @${user}, just so you know, I've updated your branch, hope this helps. If you don't like it, add the "no-auto-update" label to this PR and I won't do it again for this PR.`
-                  });
                   break;
                 case 403: 
                   console.log("Darn! Seems like I don't have permissions? The message was...");

@@ -1,4 +1,3 @@
-
 name: 'Auto-update notify'
   on: 
     pull_request_target:

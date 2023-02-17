@@ -13,7 +13,7 @@ jobs:
           script: |
             const owner = context.repo.owner;
             const repo = context.repo.repo;
-            const pr = context.payload.number;
+            const pr = context.payload.pull_request.number;
             const user = context.payload.pull_request.user.login;
             await github.rest.issues.createComment({
               owner,

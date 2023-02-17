@@ -44,7 +44,7 @@ jobs:
                 name: 'no-auto-update'
               });
               console.log('Checking if the no-update-label is present.');
-              consoke.log(no_update_label);
+              console.log(no_update_label);
               if (no_update_label.status === 200) {
                 console.log(`The "${pr.title}" was marked to not be updated automatically, skipping.`);
                 continue;

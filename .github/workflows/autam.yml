@@ -16,13 +16,28 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            // Get all the PRs in the repository
             const pr_list = (await github.rest.pulls.list({
               owner: context.repo.owner,
               repo: context.repo.repo
             })).data;
-            console.log(pr_list);
-            for (const pr of pr_list) {
-              if (pr.auto_merge !== undefined) {
-                console.log(`This pr wants to be updated! ${JSON.stringify(pr, undefined, 2)}`);
-              }
+            // Filter only the ones that are on auto-merge
+            const auto_merge_prs = pr_list.filter(pr => pr.auto_merge !== null);
+            // print out some statistics for debug
+            console.log('PR count:');
+            console.log(pr_list.length);
+            console.log('Of which these are on auto-merge:')
+            console.log(auto_merge_prs.length);
+            // iterate through the interesting PRs
+            for (const pr of auto_merge_prs) {
+              // debug messages
+              console.log(`Updating "${pr.title}", ${pr.user.login} will be happy!`);
+              // update pr branch
+              const update_result = await github.rest.pulls.updateBranch({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pr.number
+              });
             }
+
+

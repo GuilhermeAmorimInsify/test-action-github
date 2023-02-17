@@ -30,6 +30,9 @@ jobs:
             console.log(auto_merge_prs.length);
             // iterate through the interesting PRs
             for (const pr of auto_merge_prs) {
+              // TODO check if the PR needs updating, skip
+              // TODO check the checks and let the user know of any issues, skip
+              // TODO check if passed all reviews, skip
               // debug messages
               console.log(`Updating "${pr.title}", ${pr.user.login} will be happy!`);
               // update pr branch
@@ -38,14 +41,19 @@ jobs:
                 repo: context.repo.repo,
                 pull_number: pr.number
               });
-              // outputs result
-              console.log(update_result.data.message);
+              // outputs a message based on the status...
               switch(update_result.status) {
                 case 202: 
+                  console.log("YES! The PR was updated successfully. The message was...");
                   break;
-                case 403: break;
-                case 422: break;
+                case 403: 
+                  console.log("Darn! Seems like I don't have permissions? The message was...");
+                  break;
+                case 422: 
+                  console.log("Oops, I've have requested too many times. The message was...");
+                  break;
               }
+              console.log(update_result.data.message);
             }
 
 

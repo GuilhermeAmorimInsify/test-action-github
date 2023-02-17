@@ -1,3 +1,24 @@
+name: 'Auto-update notify'
+  on: 
+    pull_request_target:
+      types:
+        - auto_merge_enabled
+jobs:
+  notify-about-updates:
+    runs-on: self-hosted
+    steps:
+      - name: Notify the user that I will be watching the PR
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const pr = context.payload.number;
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              body: `Hey @${user}!\nSince you activated auto-merge I will be watching master-mre for any updates and auto-update your branch.\nKeep in mind I don't check for comments or successful checks. To disable the automatic updates simply disable auto-merge.`
+            });
 name: 'Auto-Update To Auto-Merge'
 on:
   push:
@@ -32,8 +53,6 @@ jobs:
             // iterate through the interesting PRs
             for (const pr of auto_merge_prs) {
               const user = pr.user.login;
-              // TODO check if passed all reviews, skip
-              console.log(pr);
               // debug messages
               console.log(`Updating "${pr.title}", ${user} will be happy!`);
               // update pr branch
@@ -51,7 +70,7 @@ jobs:
                   console.log("Darn! Seems like I don't have permissions? The message was...");
                   break;
                 case 422: 
-                  console.log("Oops, I've have requested too many times. The message was...");
+                  console.log("Oops! I've have requested too many times. The message was...");
                   break;
               }
               console.log(update_result.data.message);

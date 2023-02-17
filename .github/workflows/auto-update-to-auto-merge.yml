@@ -35,11 +35,16 @@ jobs:
               // debug messages
               console.log(`Updating "${pr.title}", ${user} will be happy!`);
               // update pr branch
-              const update_result = await github.rest.pulls.updateBranch({
-                owner,
-                repo,
-                pull_number: pr.number
-              });
+              let update_result;
+              try {
+               update_result = await github.rest.pulls.updateBranch({
+                  owner,
+                  repo,
+                  pull_number: pr.number
+                });
+              } catch (error) {
+                update_result = error;
+              }
               // outputs a message based on the status...
               switch(update_result.status) {
                 case 202:
@@ -49,7 +54,7 @@ jobs:
                   console.log("Darn! Seems like I don't have permissions? The message was...");
                   break;
                 case 422: 
-                  console.log("Oops! I've have requested too many times. The message was...");
+                  console.log("Oops! I think I found an error. The message was...");
                   break;
               }
               console.log(update_result.data.message);

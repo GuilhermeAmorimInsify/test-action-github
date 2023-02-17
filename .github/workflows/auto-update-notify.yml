@@ -14,7 +14,8 @@ jobs:
             const owner = context.repo.owner;
             const repo = context.repo.repo;
             const pr = context.payload.number;
-            const user = context.payload.user.login;
+            const user = context.payload;
+            console.log(user);
             await github.rest.issues.createComment({
               owner,
               repo,

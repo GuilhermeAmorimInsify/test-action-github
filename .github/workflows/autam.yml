@@ -49,10 +49,10 @@ jobs:
               switch(update_result.status) {
                 case 202: 
                   console.log("YES! The PR was updated successfully. The message was...");
-                  await github.rest.pulls.createReviewComment({ 
+                  await github.rest.issues.createComment({ 
                     owner,
                     repo,
-                    pull_number: pr.number,
+                    issue_number: pr.number,
                     body: `Hey @${user}, just so you know, I've updated your branch, hope this helps. If you don't like it, add the "no-auto-update" to this PR and I won't do it again for this PR.`
                   });
                   break;

@@ -1,8 +1,8 @@
 name: 'Auto-update notify'
-  on: 
-    pull_request_target:
-      types:
-        - auto_merge_enabled
+on:
+  pull_request_target:
+    types:
+      - auto_merge_enabled
 jobs:
   notify-about-updates:
     runs-on: self-hosted

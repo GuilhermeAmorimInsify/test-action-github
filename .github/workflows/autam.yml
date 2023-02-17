@@ -49,7 +49,7 @@ jobs:
               switch(update_result.status) {
                 case 202: 
                   console.log("YES! The PR was updated successfully. The message was...");
-                  await github.rest.pull.createReviewComment({ 
+                  await github.rest.pulls.createReviewComment({ 
                     owner,
                     repo,
                     pull_number: pr.number,

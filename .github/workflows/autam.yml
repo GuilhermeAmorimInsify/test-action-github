@@ -37,6 +37,16 @@ jobs:
               // TODO check the checks and let the user know of any issues, skip
               // TODO check if passed all reviews, skip
               // TODO check if the no-auto-update tag is added
+              // Checking if this has the "no-auto-update label"
+              const no_update_label = await github.rest.issues.getLabel({
+                owner,
+                repo,
+                'no-auto-update'
+              }).status;
+              if (no_update_label === 200) {
+                console.log(`The "${pr.title}" was marked to not be updated automatically, skipping.`);
+                continue;
+              }
               // debug messages
               console.log(`Updating "${pr.title}", ${user} will be happy!`);
               // update pr branch
@@ -53,7 +63,7 @@ jobs:
                     owner,
                     repo,
                     issue_number: pr.number,
-                    body: `Hey @${user}, just so you know, I've updated your branch, hope this helps. If you don't like it, add the #no-auto-update tag to this PR and I won't do it again for this PR.`
+                    body: `Hey @${user}, just so you know, I've updated your branch, hope this helps. If you don't like it, add the "no-auto-update" label to this PR and I won't do it again for this PR.`
                   });
                   break;
                 case 403: 

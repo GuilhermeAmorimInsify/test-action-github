@@ -23,7 +23,7 @@ jobs:
             // Filter only the ones that are on auto-merge
             const auto_merge_prs = pr_list.filter(pr =>
               pr.auto_merge !== null
-            ));
+            );
             // print out some statistics for debug
             console.log('PR count:');
             console.log(pr_list.length);

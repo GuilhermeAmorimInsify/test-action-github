@@ -1,3 +1,3 @@
 function main() {
-  console.log("im a function causing a conflict");
+  console.log("I'm updating this code");
 }

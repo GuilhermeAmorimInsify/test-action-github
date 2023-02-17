@@ -43,7 +43,7 @@ jobs:
                 repo,
                 name: 'no-auto-update'
               }).status;
-              if (no_update_label === 200) {
+              if (no_update_label.status === 200) {
                 console.log(`The "${pr.title}" was marked to not be updated automatically, skipping.`);
                 continue;
               }

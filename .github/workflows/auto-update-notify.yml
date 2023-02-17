@@ -18,6 +18,6 @@ jobs:
             await github.rest.issues.createComment({
               owner,
               repo,
-              pull_number: pr,
+              issue_number: pr,
               body: `Hey @${user}!\nSince you activated auto-merge I will be watching master-mre for any updates and auto-update your branch.\nKeep in mind I don't check for comments or successful checks. To disable the automatic updates simply disable auto-merge.`
             });

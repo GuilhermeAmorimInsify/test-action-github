@@ -53,7 +53,7 @@ jobs:
                     owner,
                     repo,
                     issue_number: pr.number,
-                    body: `Hey @${user}, just so you know, I've updated your branch, hope this helps. If you don't like it, add the "no-auto-update" to this PR and I won't do it again for this PR.`
+                    body: `Hey @${user}, just so you know, I've updated your branch, hope this helps. If you don't like it, add the #no-auto-update tag to this PR and I won't do it again for this PR.`
                   });
                   break;
                 case 403: 

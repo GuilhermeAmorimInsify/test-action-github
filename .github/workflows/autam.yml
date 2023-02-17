@@ -41,7 +41,7 @@ jobs:
               const no_update_label = await github.rest.issues.getLabel({
                 owner,
                 repo,
-                'no-auto-update'
+                name: 'no-auto-update'
               }).status;
               if (no_update_label === 200) {
                 console.log(`The "${pr.title}" was marked to not be updated automatically, skipping.`);
